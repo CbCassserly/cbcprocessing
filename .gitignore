@@ -1,2 +1,7 @@
 node_modules/
 config.js
+download/*
+upload/*
+
+!download/.gitkeep
+!upload/.gitkeep
