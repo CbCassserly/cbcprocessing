@@ -90,6 +90,16 @@
         });
     };
 
+    var deleteDirectMessage = function (direct_message_id) {
+        T.delete('direct_messages/events/destroy', { id: direct_message_id }, function (err, data, response) {
+            if (!err) {
+                console.log('DM deleted!');
+            } else {
+                console.log(err);
+            }
+        });
+    };
+
     var stream = T.stream('user');
     stream.on('direct_message', function (data) {
         console.log('Reading new direct message...');
@@ -97,6 +107,7 @@
         var tmp_img = 'tmp/image_tmp.jpg';
         addTextToImage(dm_text, tmp_img, function () {
             postTweetImage(tmp_img, dm_text);
+            deleteDirectMessage(data.direct_message.id_str);
         });
     });
 })();
